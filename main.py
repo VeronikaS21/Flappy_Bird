@@ -6,6 +6,7 @@ clock = pygame.time.Clock()
  #added surface
 bg_surface = pygame.transform.scale2x(pygame.image.load('assets/sprites/background-day.png').convert()) # to run the game faster we added convert
 floor_surface = pygame.transform.scale2x(pygame.image.load('assets/sprites/base.png').convert())
+floor_x_pos = 0
 # Game loop
 while True:
   # to close the game
@@ -13,7 +14,10 @@ while True:
       if event.type == pygame.QUIT:
           pygame.quit()
           sys.exit()
+   #background
   screen.blit(bg_surface, (0,0)) # on display surface put the background surface
-  screen.blit(floor_surface, (0,(900)))
+  #floor, the image is never static it's always redrawn
+  floor_x_pos -= 1
+  screen.blit(floor_surface, (floor_x_pos,900))
   pygame.display.update()
   clock.tick(120)
