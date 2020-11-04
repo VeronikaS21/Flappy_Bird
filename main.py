@@ -1,5 +1,9 @@
 import pygame, sys
 
+def draw_floor():
+    screen.blit(floor_surface, (floor_x_pos,900))
+    screen.blit(floor_surface, (floor_x_pos + 576,900))
+
 pygame.init() #initializes pygame
 screen = pygame.display.set_mode((576, 1024)) # display surface, widht and height
 clock = pygame.time.Clock()
@@ -18,6 +22,9 @@ while True:
   screen.blit(bg_surface, (0,0)) # on display surface put the background surface
   #floor, the image is never static it's always redrawn
   floor_x_pos -= 1
-  screen.blit(floor_surface, (floor_x_pos,900))
+  draw_floor()
+  if floor_x_pos <= -576:
+      floor_x_pos = 0
+      
   pygame.display.update()
   clock.tick(120)
