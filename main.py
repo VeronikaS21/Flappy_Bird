@@ -3,8 +3,8 @@ import pygame, sys
 pygame.init() #initializes pygame
 screen = pygame.display.set_mode((576, 1024)) # display surface, widht and height
 clock = pygame.time.Clock()
-bg_surface = pygame.image.load('assets/sprites/background-day.png') #added surface
-bg_surface = pygame.transform.scale2x(bg_surface)
+ #added surface
+bg_surface = pygame.transform.scale2x(pygame.image.load('assets/sprites/background-day.png').convert())
 
 # Game loop
 while True:
