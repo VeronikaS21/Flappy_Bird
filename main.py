@@ -2,6 +2,7 @@ import pygame, sys
 
 pygame.init() #initializes pygame
 screen = pygame.display.set_mode((576, 1024)) # widht and height
+clock = pygame.time.Clock()
 
 while True:
   # to close the game
@@ -11,3 +12,4 @@ while True:
           sys.exit()
 
   pygame.display.update()
+  clock.tick(120)
