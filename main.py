@@ -28,6 +28,7 @@ while True:
           sys.exit()
       if  event.type == pygame.KEYDOWN:
           if event.key == pygame.K_SPACE:
+              bird_movement = 0   # to make the jump even height
               bird_movement -= 12
    #background
   screen.blit(bg_surface, (0,0)) # on display surface put the background surface
