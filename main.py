@@ -17,8 +17,11 @@ def move_pipes(pipes):
 
 def draw_pipes(pipes):
     for pipe in pipes:
-        screen.blit(pipe_surface, pipe)  # what and position
-
+        if pipe.bottom >= 1024: # only the bottom pipe can reach this position
+           screen.blit(pipe_surface, pipe)  # what and position
+        else:
+            flip_pipe = pygame.transform.flip(pipe_surface, False, True) #which way to flip it
+            screen.blit(flip_pipe, pipe)
 pygame.init() #initializes pygame
 screen = pygame.display.set_mode((576, 1024)) # display surface, widht and height
 clock = pygame.time.Clock()
