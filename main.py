@@ -1,11 +1,12 @@
-import pygame, sys
+import pygame, sys, random # imported random to make the pipes of different sizes
 
 def draw_floor():
     screen.blit(floor_surface, (floor_x_pos,900))
     screen.blit(floor_surface, (floor_x_pos + 576,900))
 
 def create_pipe():
-    new_pipe = pipe_surface.get_rect(midtop = (288,512))
+    random_pipe_positon = random.choice(pipe_height) #picks a random pipe height
+    new_pipe = pipe_surface.get_rect(midtop = (700,random_pipe_positon))
     return new_pipe
 
 def move_pipes(pipes):
@@ -39,7 +40,7 @@ pipe_surface = pygame.transform.scale2x(pygame.image.load('assets/sprites/pipe-g
 pipe_list = [] # for making many rectangles, not just one, since we will be having many pipes that move to left
 SPAWNPIPE = pygame.USEREVENT  #timer which is trigered with timer not by clicking the mouse or key
 pygame.time.set_timer(SPAWNPIPE, 1200) #an event that is going to be trigered every 1.2 seconds
-
+pipe_height = [400, 600, 800] # all the posible heights that pipes can have
 # Game loop
 while True:
   # to close the game
