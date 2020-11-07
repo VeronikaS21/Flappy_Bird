@@ -28,7 +28,7 @@ def check_collision(pipes):
             return False  #returns false if collision happens, use as little collisions as possible
     if bird_rect.top <= -100 or bird_rect.bottom >= 900:  #to check if the bird is under the pipes or over the pipes
      return False
-     
+
     return True # if neither of these trigger
 
 pygame.init() #initializes pygame
@@ -64,10 +64,13 @@ while True:
           pygame.quit()
           sys.exit()
       if  event.type == pygame.KEYDOWN:
-          if event.key == pygame.K_SPACE:
+          if event.key == pygame.K_SPACE and game_active == True:
               bird_movement = 0   # to make the jump even height
               bird_movement -= 12
-    #pipes
+          if event.key == pygame.K_SPACE and game_active == False:
+             game_active = True # for restarting the game
+
+    #Pipes
       if event.type == SPAWNPIPE:
           pipe_list.extend(create_pipe())
 
