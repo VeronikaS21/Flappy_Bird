@@ -69,7 +69,9 @@ while True:
               bird_movement -= 12
           if event.key == pygame.K_SPACE and game_active == False:
              game_active = True # for restarting the game
-
+             pipe_list.clear() # empty the entier list and return the bird to the start position
+             bird_rect.center(100, 512)
+             bird_movement = 0
     #Pipes
       if event.type == SPAWNPIPE:
           pipe_list.extend(create_pipe())
