@@ -25,19 +25,23 @@ def draw_pipes(pipes):
 def check_collision(pipes):
     for pipe in pipes:
         if bird_rect.colliderect(pipe):
-            print "Collison"  #returns true if collision happens, use as little collisions as possible
+            return False  #returns false if collision happens, use as little collisions as possible
     if bird_rect.top <= -100 or bird_rect.bottom >= 900:  #to check if the bird is under the pipes or over the pipes
-     print "collision"
+     return False
+     
+    return True # if neither of these trigger
 
 pygame.init() #initializes pygame
 screen = pygame.display.set_mode((576, 1024)) # display surface, widht and height
 clock = pygame.time.Clock()
 
-#game variables
+#Game variables
 gravity = 0.25    # to make the bird fall down
 bird_movement = 0
+game_active = True  # if the game is active the bird and the pipes are visible
 
- #Floor
+
+#Floor
 bg_surface = pygame.transform.scale2x(pygame.image.load('assets/sprites/background-day.png').convert()) # to run the game faster we added convert
 floor_surface = pygame.transform.scale2x(pygame.image.load('assets/sprites/base.png').convert())
 floor_x_pos = 0
@@ -69,15 +73,17 @@ while True:
 
   screen.blit(bg_surface, (0,0)) # on display surface put the background surface
 
-  # Display the bird
-  bird_movement += gravity
-  bird_rect.centery += bird_movement
-  screen.blit(bird_surface, bird_rect)
-  check_collision(pipe_list)
-  # Pipes
+  if game_active:
+      # Display the bird
+      bird_movement += gravity
+      bird_rect.centery += bird_movement
+      screen.blit(bird_surface, bird_rect)
+      game_active = check_collision(pipe_list) # if any of the elements in the check_collision method are true the game should turn off, game_active should change to FALSE
 
-  pipe_list = move_pipes(pipe_list)
-  draw_pipes(pipe_list)
+      # Pipes
+      pipe_list = move_pipes(pipe_list)
+      draw_pipes(pipe_list)
+
   #Floor, the image is never static it's always redrawn
   floor_x_pos -= 1
   draw_floor()
