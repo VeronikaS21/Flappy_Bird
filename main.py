@@ -30,6 +30,9 @@ def check_collision(pipes):
      return False
 
     return True # if neither of these trigger
+def rotate_bird(bird):
+    new_bird = pygame.transform.rotozoom(bird,-bird_movement * 3,1)
+    return new_bird
 
 pygame.init() #initializes pygame
 screen = pygame.display.set_mode((576, 1024)) # display surface, widht and height
@@ -81,8 +84,9 @@ while True:
   if game_active:
       # Display the bird
       bird_movement += gravity
+      rotated_bird = rotate_bird(bird_surface)
       bird_rect.centery += bird_movement
-      screen.blit(bird_surface, bird_rect)
+      screen.blit(rotated_bird, bird_rect)
       game_active = check_collision(pipe_list) # if any of the elements in the check_collision method are true the game should turn off, game_active should change to FALSE
 
       # Pipes
